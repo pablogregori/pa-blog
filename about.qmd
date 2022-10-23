@@ -16,4 +16,5 @@ about:
 
 ---
 
-This blog is a site where I post interesting facts that I don't want to forget. It is it useful for you, I'll be glad.
+- This blog is a site where I post interesting facts that I don't want to forget. It is it useful for you, I'll be glad.
+- [R project](https://r-project.org), [Rstudio](https://rstudio.com) and [R-bloggers](https://r-bloggers.com) are great resources for statistics and probability
