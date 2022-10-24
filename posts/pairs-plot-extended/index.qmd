@@ -1,0 +1,56 @@
+---
+title: "Pairs plot extended"
+author: "Pablo Gregori"
+date: "2022-10-24"
+categories: [analysis, R]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+I'd like to make my own `pairs` plot, because all the versions I have found are good, but they miss a point about mosaic plots that I like. I show an example using the `mtcars` dataset, summarized as:
+
+```{r}
+summary(mtcars)
+```
+
+First of all, I change to, "factor" variables, the false numeric variables `vs`, `am`, and the convenient numeric variables `cyl`, `gear` and `carb`, and show the summary again:
+
+```{r}
+for(i in c('vs', 'am', 'cyl', 'gear', 'carb')) {
+  mtcars[[i]] = factor(mtcars[[i]])
+}
+summary(mtcars)
+```
+
+
+Now, let's see how the plain `plot` function deals with it:
+
+```{r}
+plot(mtcars)
+```
+
+Scatterplots for all the variables. Not the best choice.
+
+Now, let's see how the `pairs` function deals with it:
+
+```{r}
+pairs(mtcars)
+```
+
+Same output.
+
+Hadley Wickham did a good job for generalizing this kind of plots in [their paper](https://vita.had.co.nz/papers/gpp.pdf).
+
+They talk about `gpairs` function, in package `gpairs`.
+
+```{r}
+require(gpairs)
+gpairs(mtcars)
+```
+
+Beautiful.
+
+Only one objection. The mosaic plots show the marginal distributions of the $y$-axis variables, and the conditionals of the $x$-axis variable, given the values of the $y$-axis variables. Why?
