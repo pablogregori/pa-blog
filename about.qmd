@@ -4,17 +4,20 @@ image: foto-pablo-2020-cara-v2.jpg
 about:
   template: jolla
   links:
-    - icon: twitter
-      text: Twitter
-      href: https://twitter.com
-    - icon: linkedin
-      text: LinkedIn
-      href: https://linkedin.com
-    - icon: github
-      text: Github
-      href: https://github.com
+    - text: R
+      href: https://www.r-project.org
+    - text: Rstudio (soon Posit)
+      href: https://www.rstudio.com
+    - text: R-bloggers
+      href: https://www.r-bloggers.com
 
 ---
 
-- This blog is a site where I post interesting facts that I don't want to forget. It is it useful for you, I'll be glad.
-- [R project](https://r-project.org), [Rstudio](https://rstudio.com) and [R-bloggers](https://r-bloggers.com) are great resources for statistics and probability
+- Pablo Gregori, associate professor at Universitat Jaume I in Castellon (Spain).
+- Enthousiastic of maths in general:
+    - beautiful proofs,
+    - solving problems,
+    - probability, statistics and R since 2000.
+- Enjoy teaching stats and probs to students
+- Table tennis too.
+- Do research on spatial statistics when I have time.

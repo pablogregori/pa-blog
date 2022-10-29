@@ -11,6 +11,8 @@ website:
       - about.qmd
       - icon: rss
         href: index.xml
+      - text: R-bloggers
+        href: https://www.r-bloggers.com
 format:
   html:
     theme:
