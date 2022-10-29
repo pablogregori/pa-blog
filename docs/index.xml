@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>pa-blog (statistics stuff for you and for me)</title>
+<link>https://pablogregori.github.io/pa-blog/index.html</link>
+<atom:link href="https://pablogregori.github.io/pa-blog/index.xml" rel="self" type="application/rss+xml"/>
+<description>A blog my stats and R ideas</description>
+<generator>quarto-1.1.189</generator>
+<lastBuildDate>Sun, 23 Oct 2022 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Pairs plot extended</title>
+  <dc:creator>Pablo Gregori</dc:creator>
+  <link>https://pablogregori.github.io/pa-blog/posts/pairs-plot-extended/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>I’d like to make my own <code>pairs</code> plot, because all the versions I have found are good, but they miss a point about mosaic plots that I like. I show an example using the <code>mtcars</code> dataset, summarized as:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>      mpg             cyl             disp             hp       
+ Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  
+ 1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  
+ Median :19.20   Median :6.000   Median :196.3   Median :123.0  
+ Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  
+ 3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  
+ Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  
+      drat             wt             qsec             vs        
+ Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  
+ 1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  
+ Median :3.695   Median :3.325   Median :17.71   Median :0.0000  
+ Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  
+ 3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  
+ Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  
+       am              gear            carb      
+ Min.   :0.0000   Min.   :3.000   Min.   :1.000  
+ 1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  
+ Median :0.0000   Median :4.000   Median :2.000  
+ Mean   :0.4062   Mean   :3.688   Mean   :2.812  
+ 3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  
+ Max.   :1.0000   Max.   :5.000   Max.   :8.000  </code></pre>
+</div>
+</div>
+<p>First of all, I change to, “factor” variables, the false numeric variables <code>vs</code>, <code>am</code>, and the convenient numeric variables <code>cyl</code>, <code>gear</code> and <code>carb</code>, and show the summary again:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>      mpg        cyl         disp             hp             drat      
+ Min.   :10.40   4:11   Min.   : 71.1   Min.   : 52.0   Min.   :2.760  
+ 1st Qu.:15.43   6: 7   1st Qu.:120.8   1st Qu.: 96.5   1st Qu.:3.080  
+ Median :19.20   8:14   Median :196.3   Median :123.0   Median :3.695  
+ Mean   :20.09          Mean   :230.7   Mean   :146.7   Mean   :3.597  
+ 3rd Qu.:22.80          3rd Qu.:326.0   3rd Qu.:180.0   3rd Qu.:3.920  
+ Max.   :33.90          Max.   :472.0   Max.   :335.0   Max.   :4.930  
+       wt             qsec       vs     am     gear   carb  
+ Min.   :1.513   Min.   :14.50   0:18   0:19   3:15   1: 7  
+ 1st Qu.:2.581   1st Qu.:16.89   1:14   1:13   4:12   2:10  
+ Median :3.325   Median :17.71                 5: 5   3: 3  
+ Mean   :3.217   Mean   :17.85                        4:10  
+ 3rd Qu.:3.610   3rd Qu.:18.90                        6: 1  
+ Max.   :5.424   Max.   :22.90                        8: 1  </code></pre>
+</div>
+</div>
+<p>Now, let’s see how the plain <code>plot</code> function deals with it:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://pablogregori.github.io/pa-blog/posts/pairs-plot-extended/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Scatterplots for all the variables. Not the best choice.</p>
+<p>Now, let’s see how the <code>pairs</code> function deals with it:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://pablogregori.github.io/pa-blog/posts/pairs-plot-extended/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Same output.</p>
+<p>Hadley Wickham did a good job for generalizing this kind of plots in <a href="https://vita.had.co.nz/papers/gpp.pdf">their paper</a>.</p>
+<p>They talk about <code>gpairs</code> function, in package <code>gpairs</code>.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: gpairs</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="https://pablogregori.github.io/pa-blog/posts/pairs-plot-extended/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Beautiful.</p>
+<p>Only one objection. The mosaic plots show the marginal distributions of the <img src="https://latex.codecogs.com/png.latex?y">-axis variables, and the conditionals of the <img src="https://latex.codecogs.com/png.latex?x">-axis variable, given the values of the <img src="https://latex.codecogs.com/png.latex?y">-axis variables. Why?</p>
+
+
+
+ ]]></description>
+  <category>analysis</category>
+  <category>R</category>
+  <guid>https://pablogregori.github.io/pa-blog/posts/pairs-plot-extended/index.html</guid>
+  <pubDate>Sun, 23 Oct 2022 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Welcome To My Blog</title>
+  <dc:creator>Pablo Gregori </dc:creator>
+  <link>https://pablogregori.github.io/pa-blog/posts/welcome/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>This is the first post in a Quarto blog. Welcome!</p>
+<p>Since this post doesn’t specify an explicit <code>image</code>, the first image in the post will be used in the listing page of posts.</p>
+
+
+
+ ]]></description>
+  <category>news</category>
+  <guid>https://pablogregori.github.io/pa-blog/posts/welcome/index.html</guid>
+  <pubDate>Sun, 23 Oct 2022 22:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

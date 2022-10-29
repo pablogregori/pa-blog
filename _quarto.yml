@@ -3,14 +3,14 @@ project:
   output-dir: docs
 
 website:
-  title: "pa-blog (Statistics stuff for you and for me)"
+  title: "pa-blog (statistics stuff for you and for me)"
+  site-url: https://pablogregori.github.io/pa-blog/
+  description: "A blog my stats and R ideas"
   navbar:
     right:
       - about.qmd
-      - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+      - icon: rss
+        href: index.xml
 format:
   html:
     theme: cosmo
